@@ -1,36 +1,37 @@
 package br.ueg.trindade.artifact.Web_2_fullstack.Controller;
 
 import br.ueg.trindade.artifact.Web_2_fullstack.model.Produto;
+import br.ueg.trindade.artifact.Web_2_fullstack.repository.ProdutoRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class ProdutoController {
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     @GetMapping("/produtos")
     public List<Produto> getProdutos() {
+        return produtoRepository.findAll();
+    }
 
-        List<Produto> produtos = new ArrayList<>();
+    @GetMapping("/produtos/{id}")
+    public Produto getProdutoById(@PathVariable Long id) {
+        return produtoRepository.findById(id).orElse(null);
+    }
 
-        Produto produto1 = new Produto();
-        produto1.setId(1L);
-        produto1.setNome("Café Expresso");
-        produto1.setDescricao("Café expresso tradicional");
-        produto1.setPreco(5.00);
-
-        Produto produto2 = new Produto();
-        produto2.setId(2L);
-        produto2.setNome("Cappuccino");
-        produto2.setDescricao("Cappuccino cremoso");
-        produto2.setPreco(8.50);
-
-        produtos.add(produto1);
-        produtos.add(produto2);
-
-        return produtos;
+    @PostMapping("/produtos")
+    public Produto createProduto(@RequestBody Produto produto) {
+        return produtoRepository.save(produto);
     }
 }
