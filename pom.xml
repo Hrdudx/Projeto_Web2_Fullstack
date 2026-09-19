@@ -13,11 +13,11 @@
 	</parent>
 
 	<groupId>br.ueg.trindae</groupId>
-	<artifactId>artifact-Web-2-fullstack</artifactId>
+	<artifactId>projeto-web2-fullstack</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>artifact-Web-2-fullstack</name>
-	<description>Projeto Web 2 Fullstack</description>
+	<name>Projeto Web2 Fullstack</name>
+	<description>Projeto Web 2 Fullstack - Disciplina Programação Web II</description>
 
 	<properties>
 		<java.version>21</java.version>
