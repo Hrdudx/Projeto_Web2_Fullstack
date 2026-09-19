@@ -1,12 +1,12 @@
-package br.ueg.trindade.artifact.Web_2_fullstack;
+package br.ueg.trindade.projetoweb2fullstack;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ArtifactWeb2FullstackApplication {
+public class ProjetoWeb2FullstackApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ArtifactWeb2FullstackApplication.class, args);
+        SpringApplication.run(ProjetoWeb2FullstackApplication.class, args);
     }
 }

@@ -1,4 +1,4 @@
-package br.ueg.trindade.artifact.Web_2_fullstack.model;
+package br.ueg.trindade.projetoweb2fullstack.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

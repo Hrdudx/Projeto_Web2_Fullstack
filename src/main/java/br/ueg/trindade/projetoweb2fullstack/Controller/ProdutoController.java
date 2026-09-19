@@ -1,7 +1,7 @@
-package br.ueg.trindade.artifact.Web_2_fullstack.Controller;
+package br.ueg.trindade.projetoweb2fullstack.Controller;
 
-import br.ueg.trindade.artifact.Web_2_fullstack.model.Produto;
-import br.ueg.trindade.artifact.Web_2_fullstack.repository.ProdutoRepository;
+import br.ueg.trindade.projetoweb2fullstack.model.Produto;
+import br.ueg.trindade.projetoweb2fullstack.repository.ProdutoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

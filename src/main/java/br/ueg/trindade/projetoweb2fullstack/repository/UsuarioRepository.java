@@ -1,6 +1,6 @@
-package br.ueg.trindade.artifact.Web_2_fullstack.repository;
+package br.ueg.trindade.projetoweb2fullstack.repository;
 
-import br.ueg.trindade.artifact.Web_2_fullstack.Usuario;
+import br.ueg.trindade.projetoweb2fullstack.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {

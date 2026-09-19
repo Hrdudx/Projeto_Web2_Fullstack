@@ -104,7 +104,7 @@
 
 				<configuration>
 					<mainClass>
-						br.ueg.trindade.artifact.Web_2_fullstack.ArtifactWeb2FullstackApplication
+						br.ueg.trindade.projetoweb2fullstack.ProjetoWeb2FullstackApplication
 					</mainClass>
 				</configuration>
 

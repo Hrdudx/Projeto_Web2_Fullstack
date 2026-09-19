@@ -1,4 +1,4 @@
-package br.ueg.trindade.artifact.Web_2_fullstack.config;
+package br.ueg.trindade.projetoweb2fullstack.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
