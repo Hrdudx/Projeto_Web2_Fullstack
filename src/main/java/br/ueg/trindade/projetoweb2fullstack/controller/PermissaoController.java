@@ -1,4 +1,4 @@
-package br.ueg.trindade.projetoweb2fullstack.Controller;
+package br.ueg.trindade.projetoweb2fullstack.controller;
 
 import br.ueg.trindade.projetoweb2fullstack.model.Permissao;
 import br.ueg.trindade.projetoweb2fullstack.repository.PermissaoRepository;

@@ -1,6 +1,6 @@
-package br.ueg.trindade.projetoweb2fullstack.Controller;
+package br.ueg.trindade.projetoweb2fullstack.controller;
 
-import br.ueg.trindade.projetoweb2fullstack.Usuario;
+import br.ueg.trindade.projetoweb2fullstack.model.Usuario;
 import br.ueg.trindade.projetoweb2fullstack.repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

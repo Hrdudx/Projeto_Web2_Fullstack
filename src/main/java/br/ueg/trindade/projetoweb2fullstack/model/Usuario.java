@@ -1,4 +1,4 @@
-package br.ueg.trindade.projetoweb2fullstack;
+package br.ueg.trindade.projetoweb2fullstack.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
