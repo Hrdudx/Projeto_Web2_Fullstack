@@ -1,4 +1,4 @@
-package br.ueg.trindade.projetoweb2fullstack.Controller;
+package br.ueg.trindade.projetoweb2fullstack.controller;
 
 import br.ueg.trindade.projetoweb2fullstack.model.Produto;
 import br.ueg.trindade.projetoweb2fullstack.repository.ProdutoRepository;
