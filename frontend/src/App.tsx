@@ -1,18 +1,18 @@
-import UsuarioList from "./components/UsuarioList";
-import PermissaoList from "./components/PermissaoList";
-import ProdutoList from "./components/ProdutoList";
+import UsuariosPage from "./pages/UsuariosPage";
+import PermissoesPage from "./pages/PermissoesPage";
+import ProdutosPage from "./pages/ProdutosPage";
 
 function App() {
     return (
         <div>
             <h1>Usuários cadastrados</h1>
-            <UsuarioList />
+            <UsuariosPage />
 
             <h1>Permissões cadastradas</h1>
-            <PermissaoList />
+            <PermissoesPage />
 
             <h1>Produtos cadastrados</h1>
-            <ProdutoList />
+            <ProdutosPage />
         </div>
     );
 }
