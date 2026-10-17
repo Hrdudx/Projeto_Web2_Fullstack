@@ -1,7 +1,7 @@
 package br.ueg.trindade.projetoweb2fullstack.controller;
 
 import br.ueg.trindade.projetoweb2fullstack.model.Usuario;
-import br.ueg.trindade.projetoweb2fullstack.repository.UsuarioRepository;
+import br.ueg.trindade.projetoweb2fullstack.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,43 +17,49 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/usuarios")
 @CrossOrigin(origins = "http://localhost:5173")
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
-    @GetMapping("/usuarios")
+    @GetMapping
     public List<Usuario> getAllUsuarios() {
-        return usuarioRepository.findAll();
+        return usuarioService.listarTodos();
     }
 
-    @GetMapping("/usuarios/{id}")
+    @GetMapping("/{id}")
     public Usuario getUsuarioById(@PathVariable Long id) {
-        return usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        return usuarioService.buscarPorId(id);
     }
 
-    @PostMapping("/usuarios")
+    @PostMapping
     public Usuario createUsuario(@RequestBody Usuario usuario) {
-        return usuarioRepository.save(usuario);
+        return usuarioService.criar(usuario);
     }
 
-    @PutMapping("/usuarios/{id}")
+    @PutMapping("/{id}")
     public Usuario updateUsuario(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-
-        usuario.setNome(usuarioAtualizado.getNome());
-        usuario.setUsername(usuarioAtualizado.getUsername());
-        usuario.setEmail(usuarioAtualizado.getEmail());
-
-        return usuarioRepository.save(usuario);
+        return usuarioService.atualizar(id, usuarioAtualizado);
     }
 
-    @DeleteMapping("/usuarios/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUsuario(@PathVariable Long id) {
-        usuarioRepository.deleteById(id);
+        usuarioService.excluir(id);
+    }
+
+    // GET /api/usuarios/{id}/permissoes — permissões atuais do usuário
+    @GetMapping("/{id}/permissoes")
+    public Usuario getPermissoes(@PathVariable Long id) {
+        return usuarioService.buscarPorId(id);
+    }
+
+    // PUT /api/usuarios/{id}/permissoes — salvar nova seleção (ex.: [1, 2])
+    @PutMapping("/{id}/permissoes")
+    public Usuario atualizarPermissoes(
+            @PathVariable Long id,
+            @RequestBody List<Long> idsPermissoes) {
+        return usuarioService.atribuirPermissoes(id, idsPermissoes);
     }
 }

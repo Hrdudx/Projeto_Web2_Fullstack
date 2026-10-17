@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import type { Produto } from "../types/Produto";
-import ProdutoItem from "./ProdutoItem";
-import ProdutoForm from "./ProdutoForm";
+import ProdutoItem from "../components/ProdutoItem";
+import ProdutoForm from "../components/ProdutoForm";
 
-function ProdutoList() {
+function ProdutosPage() {
     const [produtos, setProdutos] = useState<Produto[]>([]);
     const [loading, setLoading] = useState(true);
     const [erro, setErro] = useState<string | null>(null);
     const [editando, setEditando] = useState<Produto | null>(null);
 
     function carregarProdutos() {
-        setLoading(true);
         api.get<Produto[]>("/produtos")
             .then((resposta) => {
                 setProdutos(resposta.data);
@@ -39,11 +38,12 @@ function ProdutoList() {
     }
 
     if (erro) {
-        return <p>{erro}</p>;
+        return <p className="erro">{erro}</p>;
     }
 
     return (
-        <>
+        <div>
+            <h1>Produtos</h1>
             <ProdutoForm
                 key={editando?.id ?? "novo"}
                 produtoEditando={editando}
@@ -52,7 +52,6 @@ function ProdutoList() {
                     setEditando(null);
                 }}
             />
-
             <ul>
                 {produtos.map((produto) => (
                     <ProdutoItem
@@ -63,8 +62,8 @@ function ProdutoList() {
                     />
                 ))}
             </ul>
-        </>
+        </div>
     );
 }
 
-export default ProdutoList;
+export default ProdutosPage;

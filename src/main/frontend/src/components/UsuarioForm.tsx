@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import type { Usuario } from "../types/Usuario";
 
@@ -9,22 +11,32 @@ interface UsuarioFormProps {
 }
 
 function UsuarioForm({ onUsuarioSalvo, usuarioEditando }: UsuarioFormProps) {
+    const navigate = useNavigate();
     const [nome, setNome] = useState(usuarioEditando?.nome ?? "");
     const [username, setUsername] = useState(usuarioEditando?.username ?? "");
     const [email, setEmail] = useState(usuarioEditando?.email ?? "");
+    const [erro, setErro] = useState<string | null>(null);
 
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
 
         const dados = { nome, username, email };
 
-        if (usuarioEditando) {
-            await api.put(`/usuarios/${usuarioEditando.id}`, dados);
-        } else {
-            await api.post("/usuarios", dados);
+        try {
+            if (usuarioEditando) {
+                await api.put(`/usuarios/${usuarioEditando.id}`, dados);
+            } else {
+                await api.post("/usuarios", dados);
+            }
+        } catch (e) {
+            // Ex.: e-mail duplicado (regra de negócio do UsuarioService).
+            setErro((axios.isAxiosError(e) && e.response?.data?.message) || "Não foi possível salvar o usuário.");
+            return;
         }
 
         onUsuarioSalvo();
+        // Aula 08: depois de salvar, volta para a lista de usuários.
+        navigate("/usuarios");
     }
 
     return (
@@ -47,6 +59,7 @@ function UsuarioForm({ onUsuarioSalvo, usuarioEditando }: UsuarioFormProps) {
             <button type="submit">
                 {usuarioEditando ? "Salvar alterações" : "Cadastrar"}
             </button>
+            {erro && <p className="erro">{erro}</p>}
         </form>
     );
 }
