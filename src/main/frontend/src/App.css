@@ -1,0 +1,38 @@
+/* Estilo simples: menu no topo e conteúdo abaixo. */
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 12px 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu a {
+  text-decoration: none;
+}
+
+/* O NavLink coloca a classe "active" no link da página atual. */
+.menu a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.conteudo button {
+  margin-left: 8px;
+}
+
+.conteudo form input {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.conteudo fieldset label {
+  display: block;
+  margin: 6px 0;
+}
+
+.erro {
+  color: #c0392b;
+}

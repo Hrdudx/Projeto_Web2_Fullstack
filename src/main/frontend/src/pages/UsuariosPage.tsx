@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import type { Usuario } from "../types/Usuario";
-import UsuarioItem from "./UsuarioItem";
-import UsuarioForm from "./UsuarioForm";
+import UsuarioItem from "../components/UsuarioItem";
+import UsuarioForm from "../components/UsuarioForm";
 
-function UsuarioList() {
+function UsuariosPage() {
     const [usuarios, setUsuarios] = useState<Usuario[]>([]);
     const [loading, setLoading] = useState(true);
     const [erro, setErro] = useState<string | null>(null);
     const [editando, setEditando] = useState<Usuario | null>(null);
 
     function carregarUsuarios() {
-        setLoading(true);
         api.get<Usuario[]>("/usuarios")
             .then((resposta) => {
                 setUsuarios(resposta.data);
@@ -39,11 +38,12 @@ function UsuarioList() {
     }
 
     if (erro) {
-        return <p>{erro}</p>;
+        return <p className="erro">{erro}</p>;
     }
 
     return (
-        <>
+        <div>
+            <h1>Usuários</h1>
             <UsuarioForm
                 key={editando?.id ?? "novo"}
                 usuarioEditando={editando}
@@ -52,7 +52,6 @@ function UsuarioList() {
                     setEditando(null);
                 }}
             />
-
             <ul>
                 {usuarios.map((usuario) => (
                     <UsuarioItem
@@ -63,8 +62,8 @@ function UsuarioList() {
                     />
                 ))}
             </ul>
-        </>
+        </div>
     );
 }
 
-export default UsuarioList;
+export default UsuariosPage;

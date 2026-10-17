@@ -12,6 +12,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
+            // O H2 Console (Aula 03) usa frames; sem isso ele abre em branco.
+            .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
             .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
 
         return http.build();
