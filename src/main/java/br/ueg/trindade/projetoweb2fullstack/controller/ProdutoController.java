@@ -1,9 +1,10 @@
 package br.ueg.trindade.projetoweb2fullstack.controller;
 
 import br.ueg.trindade.projetoweb2fullstack.model.Produto;
-import br.ueg.trindade.projetoweb2fullstack.repository.ProdutoRepository;
+import br.ueg.trindade.projetoweb2fullstack.service.ProdutoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,41 +17,35 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/produtos")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProdutoController {
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private ProdutoService produtoService;
 
-    @GetMapping("/produtos")
+    @GetMapping
     public List<Produto> getProdutos() {
-        return produtoRepository.findAll();
+        return produtoService.listarTodos();
     }
 
-    @GetMapping("/produtos/{id}")
+    @GetMapping("/{id}")
     public Produto getProdutoById(@PathVariable Long id) {
-        return produtoRepository.findById(id).orElse(null);
+        return produtoService.buscarPorId(id);
     }
 
-    @PostMapping("/produtos")
+    @PostMapping
     public Produto createProduto(@RequestBody Produto produto) {
-        return produtoRepository.save(produto);
+        return produtoService.criar(produto);
     }
 
-    @PutMapping("/produtos/{id}")
+    @PutMapping("/{id}")
     public Produto updateProduto(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
-        Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
-
-        produto.setNome(produtoAtualizado.getNome());
-        produto.setDescricao(produtoAtualizado.getDescricao());
-        produto.setPreco(produtoAtualizado.getPreco());
-
-        return produtoRepository.save(produto);
+        return produtoService.atualizar(id, produtoAtualizado);
     }
 
-    @DeleteMapping("/produtos/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduto(@PathVariable Long id) {
-        produtoRepository.deleteById(id);
+        produtoService.excluir(id);
     }
 }
