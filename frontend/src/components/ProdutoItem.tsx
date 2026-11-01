@@ -2,17 +2,15 @@ import type { Produto } from "../types/Produto";
 
 interface ProdutoItemProps {
     produto: Produto;
-    onEditar?: () => void;
-    onExcluir?: () => void;
 }
 
-function ProdutoItem({ produto, onEditar, onExcluir }: ProdutoItemProps) {
+function ProdutoItem({ produto }: ProdutoItemProps) {
     return (
-        <li>
-            <strong>{produto.nome}</strong> — {produto.descricao} (R$ {produto.preco.toFixed(2)})
-            {onEditar && <button onClick={onEditar}>Editar</button>}
-            {onExcluir && <button onClick={onExcluir}>Excluir</button>}
-        </li>
+        <span>
+            <strong className="text-gray-800">{produto.nome}</strong>{" "}
+            <span className="text-gray-500">— {produto.descricao}</span>{" "}
+            <span className="font-medium text-green-700">R$ {produto.preco.toFixed(2)}</span>
+        </span>
     );
 }
 

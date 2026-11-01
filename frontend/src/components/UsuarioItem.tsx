@@ -1,18 +1,16 @@
+import { Link } from "react-router-dom";
 import type { Usuario } from "../types/Usuario";
 
 interface UsuarioItemProps {
     usuario: Usuario;
-    onEditar?: () => void;
-    onExcluir?: () => void;
 }
 
-function UsuarioItem({ usuario, onEditar, onExcluir }: UsuarioItemProps) {
+function UsuarioItem({ usuario }: UsuarioItemProps) {
     return (
-        <li>
-            <strong>{usuario.nome}</strong> ({usuario.username}) — {usuario.email}
-            {onEditar && <button onClick={onEditar}>Editar</button>}
-            {onExcluir && <button onClick={onExcluir}>Excluir</button>}
-        </li>
+        <Link to={`/usuarios/${usuario.id}`}
+            className="font-medium text-blue-600 hover:underline">
+            {usuario.nome} <span className="text-gray-500">({usuario.username})</span>
+        </Link>
     );
 }
 
